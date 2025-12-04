@@ -1,0 +1,35 @@
+---
+title: "SW"
+author: "BFW"
+format: html
+editor: visual
+---
+
+# Interactive scatter plot
+
+Here is a visual illustration of star wars characters on an interactive scatter plot. The code can be replicated. Enjoy.
+
+```{r}
+library(tidyverse)
+library(plotly)
+data(starwars)
+data<- starwars %>% filter(!is.na(height), !is.na(mass))
+p <- ggplot(data, aes(height, mass)) +
+  geom_point(
+    aes(
+      text = paste0(
+        "<b>", name, "</b>",
+        "<br>Species: ", coalesce(species, "Unknown"),
+        "<br>Homeworld: ", coalesce(homeworld, "Unknown"),
+        "<br>Height: ", height, " cm",
+        "<br>Mass: ", mass, " kg"
+      ),
+      colour = species
+    ),
+    size = 2.5, alpha = 0.9
+  ) +
+  coord_cartesian(ylim = c(0, 200)) +
+  labs(x = "Height (cm)", y = "Mass (kg)", color = "Species") +
+  theme_minimal()
+ggplotly(p, tooltip = "text")
+```
