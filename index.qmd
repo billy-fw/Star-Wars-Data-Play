@@ -3,6 +3,9 @@ title: "SW"
 author: "BFW"
 format: html
 editor: visual
+execute:
+  message: false
+  warning: false
 ---
 
 # Interactive scatter plot
@@ -10,6 +13,8 @@ editor: visual
 Here is a visual illustration of star wars characters on an interactive scatter plot. The code can be replicated. Enjoy.
 
 ```{r}
+#|message: FALSE
+#|warning: FALSE
 library(tidyverse)
 library(plotly)
 data(starwars)
